@@ -3,8 +3,15 @@ using FoundryTravel.Application.Extensions;
 using FoundryTravel.Infrastructure.Extensions;
 using FoundryTravel.Infrastructure.Persistence;
 using FoundryTravel.Infrastructure.Seed;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .Enrich.FromLogContext()
+    .CreateLogger();
+builder.Host.UseSerilog();
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
