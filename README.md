@@ -21,10 +21,10 @@ A .NET 10 Travel API with AI-powered hotel search and recommendations using Azur
 
 ```
 src/
-??? FoundryTravel.Api/           # Web API layer (controllers, middleware)
-??? FoundryTravel.Application/   # Application services and DTOs
-??? FoundryTravel.Domain/        # Domain entities and interfaces
-??? FoundryTravel.Infrastructure/# Data access and external services
+|-- FoundryTravel.Api/           # Web API layer (controllers, middleware)
+|-- FoundryTravel.Application/   # Application services and DTOs
+|-- FoundryTravel.Domain/        # Domain entities and interfaces
+|-- FoundryTravel.Infrastructure/# Data access and external services
 ```
 
 ## Getting Started
