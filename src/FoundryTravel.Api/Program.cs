@@ -1,7 +1,8 @@
+using FoundryTravel.Api.Middleware;
+using FoundryTravel.Application.Extensions;
 using FoundryTravel.Infrastructure.Extensions;
 using FoundryTravel.Infrastructure.Persistence;
 using FoundryTravel.Infrastructure.Seed;
-using FoundryTravel.Application.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -52,6 +53,8 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseHttpsRedirection();
 
