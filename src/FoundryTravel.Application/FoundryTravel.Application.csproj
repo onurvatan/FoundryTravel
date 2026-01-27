@@ -5,7 +5,6 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
 
-        <UseAzureOpenAIChatCompletions>true</UseAzureOpenAIChatCompletions>
     </PropertyGroup>
     <ItemGroup>
         <ProjectReference Include="..\FoundryTravel.Domain\FoundryTravel.Domain.csproj" />
