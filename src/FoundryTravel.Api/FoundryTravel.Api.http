@@ -1,6 +1,11 @@
-@FoundryTravel.Api_HostAddress = http://localhost:5182
+### Get all cities
+GET http://localhost:5000/api/cities
 
-GET {{FoundryTravel.Api_HostAddress}}/weatherforecast/
-Accept: application/json
+### Get city by id
+GET http://localhost:5000/api/cities/{{cityId}}
 
-###
+### Search hotels
+GET http://localhost:5000/api/hotels/search?cityId={{cityId}}&maxPrice=200&starRating=4
+
+### Get hotel by id
+GET http://localhost:5000/api/hotels/{{hotelId}}
