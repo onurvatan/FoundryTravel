@@ -19,11 +19,16 @@ public class HotelRepository : IHotelRepository
         return await _context.Hotels.FirstOrDefaultAsync(h => h.Id == id);
     }
 
-    public async Task<IEnumerable<Hotel>> SearchAsync(Guid cityId, decimal? maxPrice, int? starRating)
+    public async Task AddAsync(Hotel hotel)
     {
-        var query = _context.Hotels.AsQueryable();
+        _context.Hotels.Add(hotel);
+        await _context.SaveChangesAsync();
+    }
 
-        query = query.Where(h => h.CityId == cityId);
+    public async Task<(IEnumerable<Hotel>, int)> SearchAsync(
+        Guid cityId, decimal? maxPrice, int? starRating, int page, int pageSize)
+    {
+        var query = _context.Hotels.Where(h => h.CityId == cityId);
 
         if (maxPrice.HasValue)
             query = query.Where(h => h.BasePricePerNight <= maxPrice.Value);
@@ -31,12 +36,13 @@ public class HotelRepository : IHotelRepository
         if (starRating.HasValue)
             query = query.Where(h => h.StarRating == starRating.Value);
 
-        return await query.ToListAsync();
-    }
+        var total = await query.CountAsync();
 
-    public async Task AddAsync(Hotel hotel)
-    {
-        _context.Hotels.Add(hotel);
-        await _context.SaveChangesAsync();
+        var hotels = await query
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        return (hotels, total);
     }
 }

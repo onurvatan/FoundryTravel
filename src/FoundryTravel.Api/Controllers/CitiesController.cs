@@ -18,6 +18,7 @@ public class CitiesController : ControllerBase
     public async Task<IActionResult> GetAll()
     {
         var cities = await _cityService.GetAllAsync();
+
         return Ok(cities);
     }
 
@@ -25,6 +26,7 @@ public class CitiesController : ControllerBase
     public async Task<IActionResult> GetById(Guid id)
     {
         var city = await _cityService.GetByIdAsync(id);
+
         return city is null ? NotFound() : Ok(city);
     }
 }
