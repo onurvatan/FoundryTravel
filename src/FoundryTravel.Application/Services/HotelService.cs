@@ -2,20 +2,44 @@
 using FoundryTravel.Application.Interfaces;
 using FoundryTravel.Domain.Interfaces;
 
-namespace FoundryTravel.Application.Services
+namespace FoundryTravel.Application.Services;
+
+public class HotelService : IHotelService
 {
-    public class HotelService(IHotelRepository  hotelRepository) : IHotelService
+    private readonly IHotelRepository _hotelRepository;
+
+    public HotelService(IHotelRepository hotelRepository)
     {
-        private readonly IHotelRepository _hotelRepository = hotelRepository;
+        _hotelRepository = hotelRepository;
+    }
 
-        public Task<HotelDto?> GetByIdAsync(Guid id)
-        {
-            throw new NotImplementedException();
-        }
+    public async Task<IEnumerable<HotelDto>> SearchAsync(Guid cityId, decimal? maxPrice, int? starRating)
+    {
+        var hotels = await _hotelRepository.SearchAsync(cityId, maxPrice, starRating);
 
-        public Task<IEnumerable<HotelDto>> SearchAsync(Guid cityId, decimal? maxPrice, int? starRating)
-        {
-            throw new NotImplementedException();
-        }
+        return hotels.Select(h => new HotelDto(
+            h.Id,
+            h.Name,
+            h.Description,
+            h.StarRating,
+            h.BasePricePerNight,
+            h.Address
+        ));
+    }
+
+    public async Task<HotelDto?> GetByIdAsync(Guid id)
+    {
+        var hotel = await _hotelRepository.GetByIdAsync(id);
+        if (hotel == null)
+            return null;
+
+        return new HotelDto(
+            hotel.Id,
+            hotel.Name,
+            hotel.Description,
+            hotel.StarRating,
+            hotel.BasePricePerNight,
+            hotel.Address
+        );
     }
 }

@@ -1,10 +1,12 @@
 ﻿using FoundryTravel.Application.DTOs;
 using FoundryTravel.Application.Interfaces;
+using FoundryTravel.Domain.Interfaces;
 
 namespace FoundryTravel.Application.Services
 {
-    public class CityService : ICityService
+    public class CityService(ICityRepository cityRepository) : ICityService
     {
+        private readonly ICityRepository _cityRepository = cityRepository;
         public Task<IEnumerable<CityDto>> GetAllAsync()
         {
             throw new NotImplementedException();
