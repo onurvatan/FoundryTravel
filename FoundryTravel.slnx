@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/FoundryTravel.Api/FoundryTravel.Api.csproj" />
+    <Project Path="src/FoundryTravel.Application/FoundryTravel.Application.csproj" />
+    <Project Path="src/FoundryTravel.Domain/FoundryTravel.Domain.csproj" />
+    <Project Path="src/FoundryTravel.Infrastructure/FoundryTravel.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/FoundryTravel.Tests/FoundryTravel.Tests.csproj" />
+  </Folder>
+</Solution>
