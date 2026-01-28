@@ -26,9 +26,12 @@ public class HotelRepository : IHotelRepository
     }
 
     public async Task<(IEnumerable<Hotel>, int)> SearchAsync(
-        Guid cityId, decimal? maxPrice, int? starRating, int page, int pageSize)
+        Guid? cityId, decimal? maxPrice, int? starRating, int page, int pageSize)
     {
-        var query = _context.Hotels.Where(h => h.CityId == cityId);
+        var query = _context.Hotels.AsQueryable();
+
+        if (cityId.HasValue && cityId.Value != Guid.Empty)
+            query = query.Where(h => h.CityId == cityId);
 
         if (maxPrice.HasValue)
             query = query.Where(h => h.BasePricePerNight <= maxPrice.Value);

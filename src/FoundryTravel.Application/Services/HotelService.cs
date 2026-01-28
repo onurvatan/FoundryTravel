@@ -1,5 +1,6 @@
 ﻿using FoundryTravel.Application.DTOs;
 using FoundryTravel.Application.Interfaces;
+using FoundryTravel.Domain.Entities;
 using FoundryTravel.Domain.Interfaces;
 
 namespace FoundryTravel.Application.Services
@@ -9,7 +10,7 @@ namespace FoundryTravel.Application.Services
         private readonly IHotelRepository _hotelRepository = hotelRepository;
 
         public async Task<PagedResult<HotelDto>> SearchAsync(
-            Guid cityId,
+            Guid? cityId,
             decimal? maxPrice,
             int? starRating,
             int page,
@@ -55,6 +56,5 @@ namespace FoundryTravel.Application.Services
                 hotel.Address
             );
         }
-
     }
 }
