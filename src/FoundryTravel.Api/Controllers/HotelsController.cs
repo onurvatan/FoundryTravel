@@ -20,7 +20,7 @@ public class HotelsController : ControllerBase
         [FromQuery] decimal? maxPrice,
         [FromQuery] int? starRating,
         [FromQuery] int page = 1,
-        [FromQuery] int pageSize= 10)
+        [FromQuery] int pageSize= 20)
     {
         var hotels = await _hotelService.SearchAsync(cityId, maxPrice, starRating, page, pageSize);
 

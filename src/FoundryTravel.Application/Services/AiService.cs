@@ -36,6 +36,7 @@ Convert the following hotel search query into structured filters.
 User query: {query}
 
 Return ONLY valid JSON with:
+- hotelId (the GUID from the hotel list)
 - cityName (string or null)
 - maxPrice (number or null)
 - starRating (number or null)
@@ -58,7 +59,7 @@ Return ONLY valid JSON with:
         );
 
         var hotelList = string.Join("\n", hotels.Select(h =>
-            $"{h.Name} | {h.Description} | {h.StarRating} stars | {h.BasePricePerNight} EUR"
+            $"{h.Id} | {h.Name} | {h.Description} | {h.StarRating} stars | {h.BasePricePerNight} EUR"
         ));
 
         ChatCompletion completion = await _chatClient.CompleteChatAsync(
@@ -73,6 +74,7 @@ Hotels:
 {hotelList}
 
 Return ONLY JSON with:
+- hotelId (the GUID from the hotel list)
 - recommendedHotelName
 - reason
 ")
